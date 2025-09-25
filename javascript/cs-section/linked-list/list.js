@@ -58,6 +58,21 @@ class List {
   get tail() {
     return this.tail;
   }
+
+  at(index) {
+    let temp = this.head;
+    for (let i = 0; i <= index; i ++) {
+      if (i >= this.size || i < 0) {
+        throw new Error('Out of index.')
+      }
+      if (i === index) {
+        return temp;
+      } else if (temp.next) {
+        temp = temp.next
+      } 
+    }
+    return null;
+  }
 }
 
 export default List;
