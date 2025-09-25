@@ -93,6 +93,17 @@ class List {
     }
     return false;
   }
+
+  find(value) {
+    let temp = this.head;
+    for (let i = 0; i < this.size; i ++) {
+      if (temp.value === value) {
+        return i;
+      }
+      temp = temp.next
+    }
+    return null;
+  }
 }
 
 export default List;
