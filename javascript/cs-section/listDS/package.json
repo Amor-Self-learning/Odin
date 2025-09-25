@@ -1,12 +1,12 @@
 {
-  "name": "listds",
+  "name": "linked-list",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple linked list data structure implemented in Javascript",
   "main": "list.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["linked-list", "JS", "Javascript", "Javascript Linked List", "data structure"],
+  "author": "Zephyr Ammor",
   "license": "ISC"
 }
