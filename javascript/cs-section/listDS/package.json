@@ -1,5 +1,5 @@
 {
-  "name": "linked-list",
+  "name": "@ZephyrAmmor/linked-list",
   "version": "1.0.0",
   "description": "A simple linked list data structure implemented in Javascript",
   "main": "list.js",
