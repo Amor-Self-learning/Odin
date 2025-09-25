@@ -50,6 +50,14 @@ class List {
   get size() {
     return this.size;
   }
+
+  get head() {
+    return this.head;
+  }
+
+  get tail() {
+    return this.tail;
+  }
 }
 
 export default List;
