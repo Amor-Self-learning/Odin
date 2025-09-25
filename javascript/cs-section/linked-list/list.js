@@ -73,6 +73,15 @@ class List {
     }
     return null;
   }
+
+  pop() {
+    const nodeToRemove = this.at(this.size - 1);
+    const newTail = this.at(this.size - 2);
+    newTail.next = null;
+    this.tail = newTail;
+    this.size --;
+    return nodeToRemove;
+  }
 }
 
 export default List;
