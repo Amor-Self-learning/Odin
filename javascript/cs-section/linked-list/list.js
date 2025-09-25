@@ -46,6 +46,10 @@ class List {
     }
     return str;
   }
+
+  get size() {
+    return this.size;
+  }
 }
 
 export default List;
