@@ -104,6 +104,25 @@ class List {
     }
     return null;
   }
+
+  insertAt(value, index) {
+    if (index >= this.size) {
+      this.append(value);
+      return true;
+    } else if (index < 0) {
+      throw new Error('Out of Index.', index)
+    }
+    const temp = this.at(index);
+    if (temp) {
+      const node = new Node(value)
+      const newTemp = temp.next;
+      temp.next = node;
+      node.next = newTemp;
+      this.size ++;
+      return true;
+    }
+    return false;
+  }
 }
 
 export default List;
