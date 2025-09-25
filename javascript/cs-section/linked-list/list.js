@@ -123,6 +123,19 @@ class List {
     }
     return false;
   }
+
+  removeAt(index) {
+    if (index >= this.size || index < 0) {
+      throw new Error('Out of Index.')
+    }
+    const temp = this.at(index);
+    const prevTemp = this.at(index - 1)
+    if (temp) {
+      prevTemp.next = temp.next;
+      return true;
+    }
+    return false;
+  }
 }
 
 export default List;
