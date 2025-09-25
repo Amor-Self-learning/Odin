@@ -82,6 +82,17 @@ class List {
     this.size --;
     return nodeToRemove;
   }
+
+  contains(value) {
+    let temp = this.head;
+    while (temp !== null) {
+      if (temp.value === value) {
+        return true;
+      }
+        temp = temp.next
+    }
+    return false;
+  }
 }
 
 export default List;
