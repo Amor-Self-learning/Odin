@@ -34,6 +34,7 @@ class List {
   }
 
   toString() {
+    this.headTailExist()
     let temp = this.head;
     let str = '';
     while(temp != null) {
@@ -48,18 +49,22 @@ class List {
   }
 
   get size() {
+    this.headTailExist()
     return this.size;
   }
 
   get head() {
+    this.headTailExist()
     return this.head;
   }
 
   get tail() {
+    this.headTailExist()
     return this.tail;
   }
 
   at(index) {
+    this.headTailExist()
     let temp = this.head;
     for (let i = 0; i <= index; i ++) {
       if (i >= this.size || i < 0) {
@@ -75,6 +80,7 @@ class List {
   }
 
   pop() {
+    this.headTailExist()
     const nodeToRemove = this.at(this.size - 1);
     const newTail = this.at(this.size - 2);
     newTail.next = null;
@@ -95,6 +101,7 @@ class List {
   }
 
   find(value) {
+    this.headTailExist()
     let temp = this.head;
     for (let i = 0; i < this.size; i ++) {
       if (temp.value === value) {
@@ -106,6 +113,7 @@ class List {
   }
 
   insertAt(value, index) {
+    this.headTailExist()
     if (index >= this.size) {
       this.append(value);
       return true;
@@ -125,6 +133,7 @@ class List {
   }
 
   removeAt(index) {
+    this.headTailExist()
     if (index >= this.size || index < 0) {
       throw new Error('Out of Index.')
     }
@@ -135,6 +144,13 @@ class List {
       return true;
     }
     return false;
+  }
+  
+  headTailExist() {
+    if (this.head && this.tail) {
+      return true;
+    }
+    throw new Error('At least add one node to do some operations on')
   }
 }
 
