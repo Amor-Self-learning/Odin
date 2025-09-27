@@ -112,6 +112,18 @@ class HashMap {
       }
     }
   }
+
+  keys() {
+    const arr = []
+    for (let bucket of this.buckets) {
+      for (let node of bucket) {
+        if(node && node.key) {
+          arr.push(node.key)
+        }
+      }
+    }
+    return arr;
+  }
 }
 
 export default HashMap;
