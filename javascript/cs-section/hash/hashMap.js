@@ -95,6 +95,23 @@ class HashMap {
     const nodeExist = this.get(key);
     return nodeExist ? true : false;
   }
+
+  remove(key) {
+    const nodeExist = this.has(key);
+    if (! nodeExist) {
+      return false;
+    }
+    
+    const hashCode = hash(key, this.length);
+    const bucket = this.buckets[hashCode];
+    for (let i = 0; i < bucket.length; i++) {
+      if (bucket[i].key === key) {
+        bucket.splice(i, 1)
+        this.entries --;
+        return true;
+      }
+    }
+  }
 }
 
 export default HashMap;
