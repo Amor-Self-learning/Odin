@@ -1,5 +1,5 @@
 {
-  "name": "@0x_amor/hashMap",
+  "name": "@0x_amor/hash-map",
   "version": "1.0.0",
   "description": "A simple class that mimics the Map constructor of JS for only string keys",
   "main": "hashMap.js",
