@@ -90,6 +90,11 @@ class HashMap {
     }
     return null;
   }
+
+  has(key) {
+    const nodeExist = this.get(key);
+    return nodeExist ? true : false;
+  }
 }
 
 export default HashMap;
