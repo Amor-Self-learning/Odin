@@ -25,6 +25,34 @@ class HashMap {
       this.buckets[i] = []
     }
   }
+
+  validCapacity() {
+    const capacity =  this.entries / this.length;
+    if (capacity >= this.loadFactor) {
+      this.updateBuckets();
+      return true;
+    } 
+    return true;
+  }
+  updateBuckets() {
+    this.length *= 2;
+    const buckets = structuredClone(this.buckets);
+    console.log(buckets, '38')
+    this.clear()
+    console.log(buckets, '40')
+    for (let bucket of buckets) {
+      for (let node of bucket) {
+        this.set(node.key, node.value)
+      }
+    }
+  }
+
+  clear() {
+    for(let i = 0; i < this.length; i++) {
+      this.buckets[i] = []
+    }
+    this.entries = 0;
+  }
 }
 
 export default HashMap;
