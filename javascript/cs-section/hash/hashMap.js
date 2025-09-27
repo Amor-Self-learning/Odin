@@ -74,6 +74,22 @@ class HashMap {
     this.entries ++
     return true;
   }
+
+  get(key) {
+    const hashCode = hash(key, this.length);
+    let nodeExist = null;
+    const bucket = this.buckets[hashCode].length > 0 ? this.buckets[hashCode] : null;
+    if (bucket) {
+      for(let node of bucket) {
+        if (node.key === key)
+        nodeExist = node;
+      }
+      if (nodeExist) {
+        return nodeExist.value
+      }
+    }
+    return null;
+  }
 }
 
 export default HashMap;
