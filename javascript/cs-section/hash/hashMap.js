@@ -16,7 +16,7 @@ class Node {
  } 
 
 class HashMap {
-  entries = 0;
+  total = 0;
   length = 16;
   loadFactor = 0.75;
   constructor() {
@@ -27,7 +27,7 @@ class HashMap {
   }
 
   validCapacity() {
-    const capacity =  this.entries / this.length;
+    const capacity =  this.total / this.length;
     if (capacity >= this.loadFactor) {
       this.updateBuckets();
       return true;
@@ -51,7 +51,7 @@ class HashMap {
     for(let i = 0; i < this.length; i++) {
       this.buckets[i] = []
     }
-    this.entries = 0;
+    this.total = 0;
   }
 
   set(key, value) {
@@ -71,7 +71,7 @@ class HashMap {
     }
     const node = new Node(key, value);
     this.buckets[hashCode].push(node);
-    this.entries ++
+    this.total ++
     return true;
   }
 
@@ -107,7 +107,7 @@ class HashMap {
     for (let i = 0; i < bucket.length; i++) {
       if (bucket[i].key === key) {
         bucket.splice(i, 1)
-        this.entries --;
+        this.total --;
         return true;
       }
     }
@@ -131,6 +131,19 @@ class HashMap {
       for (let node of bucket) {
         if (node && node.value) {
           arr.push(node.value)
+        }
+      }
+    }
+    return arr;
+  }
+
+  entries() {
+    const arr = [];
+    for (let bucket of this.buckets) {
+      for (let node of bucket) {
+        if (node && node.key && node.value) {
+          const temp = [node.key, node.value];
+          arr.push(temp);
         }
       }
     }
