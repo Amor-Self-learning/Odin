@@ -53,6 +53,27 @@ class HashMap {
     }
     this.entries = 0;
   }
+
+  set(key, value) {
+    this.validCapacity();
+    const hashCode = hash(key, this.length);
+    let alreadyExist = null;
+    const bucket = this.buckets[hashCode].length > 0 ? this.buckets[hashCode] : null;
+    if (bucket) {
+      for(let node of bucket) {
+        if (node.key === key)
+        alreadyExist = node;
+      }
+    }
+    if (alreadyExist) {
+      alreadyExist.value = value;
+      return true;
+    }
+    const node = new Node(key, value);
+    this.buckets[hashCode].push(node);
+    this.entries ++
+    return true;
+  }
 }
 
 export default HashMap;
