@@ -15,3 +15,16 @@ class Node {
    return hashCode % length;
  } 
 
+class HashMap {
+  entries = 0;
+  length = 16;
+  loadFactor = 0.75;
+  constructor() {
+    this.buckets = [];
+    for (let i = 0; i < this.length; i ++) {
+      this.buckets[i] = []
+    }
+  }
+}
+
+export default HashMap;
