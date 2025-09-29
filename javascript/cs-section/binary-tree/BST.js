@@ -1,6 +1,6 @@
 class Node {
   constructor(value) {
-    this.data = value;
+    this.value = value;
     this.left = null;
     this.right = null;
   }
@@ -10,6 +10,21 @@ class Tree {
   constructor(...args) {
     args = removeDuplicates(args).sort((a, b) => a - b);
     this.root = buildTree(args)
+  }
+
+  insert(value, root) {
+    if (root === null) {
+      return new Node(value);
+    }
+    if (!value || value === root.value) {
+      return root;
+    }
+    else if (value < root.value) {
+      root.left = this.insert(value, root.left)
+    } else if (value > root.value) {
+      root.right  = this.insert(value, root.right)
+    }
+    return root;
   }
 }
 // Function that removes duplicates
