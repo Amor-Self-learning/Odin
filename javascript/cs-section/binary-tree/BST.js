@@ -53,8 +53,22 @@ class Tree {
     }
     return root;
   }
-}
+  findValue(value, root) {
+    if (root === null) {
+      return null;
+    }
+    if (root.value === value) {
+      return root;
+    }
+    if (root.value > value) {
+      return this.findValue(value, root.left);
+    } else if (root.value < value) {
+      return this.findValue(value, root.right);
+    }
+    return root;
+  }
 
+}
 function getSuccessor(curr) {
     curr = curr.right;
     while (curr !== null && curr.left !== null) {
