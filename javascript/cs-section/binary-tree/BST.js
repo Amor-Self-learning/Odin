@@ -26,7 +26,43 @@ class Tree {
     }
     return root;
   }
+
+  // Got this from geeks for geeks
+  deleteItem(value, root) {
+    if (root === null) {
+        return root;
+    }
+    if (root.value > value) {
+        root.left = this.deleteItem(value, root.left);
+    } else if (root.value < value) {
+        root.right = this.deleteItem(value, root.right);
+    } else {
+
+        // Cases when root has 0 children or 
+        // only right child
+        if (root.left === null) 
+            return root.right;
+
+        // When root has only left child
+        if (root.right === null) 
+            return root.left;
+        // When both children are present
+        let succ = getSuccessor(root);
+        root.value = succ.value;
+        root.right = this.deleteItem(succ.value, root.right);
+    }
+    return root;
+  }
 }
+
+function getSuccessor(curr) {
+    curr = curr.right;
+    while (curr !== null && curr.left !== null) {
+        curr = curr.left;
+    }
+    return curr;
+}
+
 // Function that removes duplicates
 function removeDuplicates(args) {
   for (let i = 0; i < args.length; i++) {
