@@ -94,11 +94,23 @@ class Tree {
       return root;
     }
     callback(root)
-    if (root.left) root.left = this.inOrderForEach(callback, root.left);
-    if (root.right) root.right = this.inOrderForEach(callback, root.right);
+    if (root.left) this.preOrderForEach(callback, root.left);
+    if (root.right) this.preOrderForEach(callback, root.right);
     return root;
   }
-
+  
+  inOrderForEach(callback, root) {
+    if (!callback || typeof callback !== 'function') {
+      throw new TypeError(`Require a callback here you provided ${callback}`)
+    }
+    if (root === null) {
+      return root;
+    }
+    if (root.left) this.inOrderForEach(callback, root.left);
+    callback(root);
+    if (root.right)  this.inOrderForEach(callback, root.right);
+    return root;
+  }
 }
 function getSuccessor(curr) {
     curr = curr.right;
