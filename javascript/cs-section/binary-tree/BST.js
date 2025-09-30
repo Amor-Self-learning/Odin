@@ -138,6 +138,26 @@ class Tree {
     }
     return findHeight(node);
   }
+
+  depth(value) {
+    function findDepth(value, currentDepth, root) {
+      if (root === null) {
+        return null;
+      }
+      if (root.value === value) {
+        return currentDepth;
+      }
+
+      if (value < root.value) {
+        return findDepth(value, currentDepth + 1,  root.left);
+      }
+      else if (value > root.value) {
+        return findDepth(value, currentDepth + 1,  root.right);
+      }
+      return currentDepth;
+    }
+    return findDepth(value, 0, this.root)
+  }
 }
 function getSuccessor(curr) {
     curr = curr.right;
@@ -201,3 +221,4 @@ prettyPrint(tree.root)
 tree.inOrderForEach(increaseByOne, tree.root)
 prettyPrint(tree.root)
 console.log(tree.height(10))
+console.log(tree.depth(11))
