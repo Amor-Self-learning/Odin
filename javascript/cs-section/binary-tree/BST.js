@@ -111,6 +111,19 @@ class Tree {
     if (root.right)  this.inOrderForEach(callback, root.right);
     return root;
   }
+
+  postOrderForEach(callback, root) {
+    if (!callback || typeof callback !== 'function') {
+      throw new TypeError(`Require a callback here you provided ${callback}`)
+    }
+    if (root === null) {
+      return root;
+    }
+    if (root.left) this.postOrderForEach(callback, root.left);
+    if (root.right)  this.postOrderForEach(callback, root.right);
+    callback(root);
+    return root;
+  }
 }
 function getSuccessor(curr) {
     curr = curr.right;
