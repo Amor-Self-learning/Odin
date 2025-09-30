@@ -182,6 +182,26 @@ class Tree {
     }
     return false;
   }
+  reBalance() {
+    const sortedArr = [];
+    const collector = (node) => {
+      sortedArr.push(node.value);
+    };
+    this.inOrderForEach(collector, this.root);
+
+      function sortedArrayToBST(arr, start, end) {
+        if (start > end) {
+          return null;
+        }
+      const mid = Math.floor((start + end) / 2);
+      const newNode = new Node(arr[mid])
+      newNode.left = sortedArrayToBST(arr, start, mid - 1);
+      newNode.right = sortedArrayToBST(arr, mid + 1, end);
+
+      return newNode;
+    }
+    this.root = sortedArrayToBST(sortedArr, 0, sortedArr.length - 1);
+}
 }
 function getSuccessor(curr) {
     curr = curr.right;
@@ -251,4 +271,7 @@ tree.insert(7000, tree.root);
 tree.insert(8000, tree.root);
 tree.insert(9000, tree.root)
 prettyPrint(tree.root)
+console.log(tree.isBalanced(tree.root))
+tree.reBalance(tree.root)
+prettyPrint(tree.root);
 console.log(tree.isBalanced(tree.root))
