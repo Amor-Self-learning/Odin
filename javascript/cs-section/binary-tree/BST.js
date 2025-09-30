@@ -158,6 +158,30 @@ class Tree {
     }
     return findDepth(value, 0, this.root)
   }
+
+  isBalanced(root) {
+      function checkBalance(root) {
+      if (root === null) {
+        return - 1;
+      }
+
+      let leftResult = checkBalance(root.left);
+      let rightResult = checkBalance(root.right);
+
+      if (leftResult === -2 || rightResult === -2) {
+        return - 2;
+      }
+      if (Math.abs(leftResult - rightResult) > 1) {
+        return -2; // Send the imbalance signal!
+      }
+
+      return 1+ Math.max(leftResult, rightResult);
+    }
+    if (checkBalance(root) !== -2){
+      return true;
+    }
+    return false;
+  }
 }
 function getSuccessor(curr) {
     curr = curr.right;
@@ -210,10 +234,11 @@ function increaseByOne(arg) {
   arg.value += 1;
 }
 prettyPrint(tree.root)
-
+console.log(tree.isBalanced(tree.root))
 tree.insert(13, tree.root);
 prettyPrint(tree.root)
 console.log(tree.findValue(13, tree.root))
+console.log(tree.isBalanced(tree.root))
 tree.deleteItem(13, tree.root);
 prettyPrint(tree.root)
 tree.levelOrderForEach(increaseByOne, tree.root)
@@ -222,3 +247,8 @@ tree.inOrderForEach(increaseByOne, tree.root)
 prettyPrint(tree.root)
 console.log(tree.height(10))
 console.log(tree.depth(11))
+tree.insert(7000, tree.root); 
+tree.insert(8000, tree.root);
+tree.insert(9000, tree.root)
+prettyPrint(tree.root)
+console.log(tree.isBalanced(tree.root))
