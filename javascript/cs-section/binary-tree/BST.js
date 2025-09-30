@@ -235,3 +235,5 @@ function buildTree(args) {
   root.right = buildTree(right);
   return root;
 }
+
+export default Tree;
