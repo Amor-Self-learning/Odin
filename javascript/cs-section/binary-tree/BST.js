@@ -85,8 +85,20 @@ class Tree {
         queue.push(node.right)
       }
     }
-    
   }
+  preOrderForEach(callback, root) {
+    if (!callback || typeof callback !== 'function') {
+      throw new TypeError(`Require a callback here you provided ${callback}`)
+    }
+    if (root === null) {
+      return root;
+    }
+    callback(root)
+    if (root.left) root.left = this.inOrderForEach(callback, root.left);
+    if (root.right) root.right = this.inOrderForEach(callback, root.right);
+    return root;
+  }
+
 }
 function getSuccessor(curr) {
     curr = curr.right;
@@ -146,4 +158,6 @@ console.log(tree.findValue(13, tree.root))
 tree.deleteItem(13, tree.root);
 prettyPrint(tree.root)
 tree.levelOrderForEach(increaseByOne, tree.root)
+prettyPrint(tree.root)
+tree.inOrderForEach(increaseByOne, tree.root)
 prettyPrint(tree.root)
