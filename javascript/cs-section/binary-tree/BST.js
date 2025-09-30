@@ -124,6 +124,20 @@ class Tree {
     callback(root);
     return root;
   }
+
+  height(value) {
+    const node = this.findValue(value, this.root);
+    if (node === null) {
+      return null;
+    }
+    function findHeight(node) {
+      if (node === null) {
+        return - 1;
+      }
+      return 1 + Math.max(findHeight(node.left), findHeight(node.right));
+    }
+    return findHeight(node);
+  }
 }
 function getSuccessor(curr) {
     curr = curr.right;
@@ -186,3 +200,4 @@ tree.levelOrderForEach(increaseByOne, tree.root)
 prettyPrint(tree.root)
 tree.inOrderForEach(increaseByOne, tree.root)
 prettyPrint(tree.root)
+console.log(tree.height(10))
