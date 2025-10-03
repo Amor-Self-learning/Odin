@@ -1,8 +1,5 @@
 let library = []
-const table = document.querySelector('.table')
-const tBody = document.createElement('tbody')
-tBody.setAttribute('id', 'tbody')
-displayTable()
+const container = document.querySelector('.container')
 // Open dialog box on add new book click
 const addNewBook = document.getElementById('add-new-book')
 const dialog = document.querySelector('dialog')
@@ -36,37 +33,14 @@ function addNewBookToLibrary(title, author, pages, read){
         value: crypto.randomUUID()
     })
     library.push(newBook)
-    displayBook(newBook)
+    displayLibrary();
 }
-function displayBook(newBook){
-   
-    const tableRow = document.createElement('tr')
-    tableRow.setAttribute('id', newBook.id)
-    for(let key in newBook){
-            const tableData = document.createElement('td')
-            if(key == 'read'){
-                const readToggleBtn = document.createElement('button')
-                readToggleBtn.textContent = newBook.showRead()
-                readToggleBtn.classList.add('read-status')
-                readToggleBtn.dataset.bookId = newBook.id
-                tableData.appendChild(readToggleBtn)
-                tableRow.appendChild(tableData)
-                continue;
-            }
-            tableData.textContent = `${newBook[key]}`
-            tableRow.appendChild(tableData)
-        }
-        const delBtn = document.createElement('button')
-        delBtn.textContent = 'Del'
-        delBtn.classList.add('del')
-        delBtn.dataset.bookId = newBook.id
-
-        const delData = document.createElement('td')
-        delData.appendChild(delBtn)
-
-        tableRow.appendChild(delData)
-        tbody.appendChild(tableRow)
-    
+function displayLibrary(){
+  for (let book of library) {
+    const newBook = createBookCard(book);
+      container.appendChild(newBook);
+  }
+  return 0;
 }
 
 const form = document.querySelector('form')
@@ -81,33 +55,8 @@ form.addEventListener('submit', (event) =>{
     dialog.close()
 })
 
-//Get Books from Library and Display them
 
-function displayTable(){
-    
-    table.textContent = ''
-    const headerRow = document.createElement('thead')
-    const titleHeader = document.createElement('th')
-    const authorHeader = document.createElement('th')
-    const pagesHeader = document.createElement('th')
-    const readHeader = document.createElement('th')
-    const delHeader = document.createElement('th')
-
-    titleHeader.textContent = 'Title'
-    authorHeader.textContent = 'Author'
-    pagesHeader.textContent = 'Pages'
-    readHeader.textContent = 'Read'
-    delHeader.textContent = 'Delete'
-    headerRow.appendChild(titleHeader)
-    headerRow.appendChild(authorHeader)
-    headerRow.appendChild(pagesHeader)
-    headerRow.appendChild(readHeader)
-    headerRow.appendChild(delHeader)
-    table.appendChild(headerRow)
-    table.appendChild(tBody)
-}
-
-table.addEventListener('click', (e) =>{
+container.addEventListener('click', (e) =>{
     if(e.target.classList.contains('read-status')){
         const bookToToggle = library.filter(item => item.id === e.target.dataset.bookId)
         bookToToggle[0].toggle()
@@ -120,3 +69,36 @@ table.addEventListener('click', (e) =>{
         tbody.removeChild(rowToDelete)
     }
 })
+
+function createBookCard(bookData) {
+  const {title, author, pages, read} = bookData;
+  const titleCard = createCard('Title : ', title);
+  const authorCard = createCard('Author : ', author);
+  const pageesCard = createCard('Pages : ', pages);
+  const readCard = createStatus(read);
+
+  const bookCard = document.createElement('div');
+  bookCard.className = 'card bookCard'
+  bookCard.append(titleCard, authorCard, pageesCard, readCard)
+  return bookCard;
+}
+
+function createCard(title, value) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const label = document.createElement('span');
+  label.classList.add('label');
+  label.textContent = title;
+  const text = document.createElement('sapn');
+  text.textContent = value;
+  text.classList.add('value');
+  card.append(label, text)
+  return card;
+}
+
+function createStatus(status) {
+  if (status === true) {
+    return createCard('Read : ', 'Completed')
+  }
+  return createCard('Read : ', 'Not Yet')
+}
