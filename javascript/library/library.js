@@ -22,7 +22,7 @@ class Book{
     }
     showRead(){
         if(this.read)
-            return 'Already'
+            return 'Completed'
         return 'Not Yet'
     }
 }
@@ -36,6 +36,9 @@ function addNewBookToLibrary(title, author, pages, read){
     displayLibrary();
 }
 function displayLibrary(){
+  while(container.firstChild) {
+    container.firstChild.remove()
+  }
   for (let book of library) {
     const newBook = createBookCard(book);
       container.appendChild(newBook);
@@ -60,18 +63,17 @@ container.addEventListener('click', (e) =>{
     if(e.target.classList.contains('read-status')){
         const bookToToggle = library.filter(item => item.id === e.target.dataset.bookId)
         bookToToggle[0].toggle()
-        e.target.textContent = bookToToggle[0].showRead()
+        displayLibrary() 
     }
     else if(e.target.classList.contains('del')){
         const indexOfBook = library.findIndex(item => item.id === e.target.dataset.bookId)
         library.splice(indexOfBook, 1)
-        const rowToDelete = document.getElementById(e.target.dataset.bookId)
-        tbody.removeChild(rowToDelete)
+        displayLibrary();
     }
 })
 
 function createBookCard(bookData) {
-  const {title, author, pages, read} = bookData;
+  const {title, author, pages, read, id} = bookData;
   const titleCard = createCard('Title : ', title);
   const authorCard = createCard('Author : ', author);
   const pageesCard = createCard('Pages : ', pages);
@@ -79,7 +81,18 @@ function createBookCard(bookData) {
 
   const bookCard = document.createElement('div');
   bookCard.className = 'card bookCard'
-  bookCard.append(titleCard, authorCard, pageesCard, readCard)
+  const readButton = document.createElement('button');
+  readButton.textContent = 'Change Status';
+  readButton.classList.add('read-status')
+  readButton.dataset.bookId = id;
+  const delButton = document.createElement('button');
+  delButton.textContent = 'Remove Book';
+  delButton.classList.add('del')
+  delButton.dataset.bookId = id;
+  const buttons = document.createElement('div');
+  buttons.classList.add('buttons-holder');
+  buttons.append(readButton, delButton)
+  bookCard.append(titleCard, authorCard, pageesCard, readCard, buttons)
   return bookCard;
 }
 
