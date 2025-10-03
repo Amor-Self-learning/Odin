@@ -14,6 +14,8 @@ body{
     background-attachment: fixed;
     margin-bottom: 1rem;
     font-family: 'Delius', 'Literata', 'Roboto', system-ui, serif;
+    font-size: 1.2rem;
+    color: rgb(244, 255, 145);
 }
 h1{
     background-color: rgba(71, 71, 71, 0.2);
@@ -24,24 +26,25 @@ h1{
     backdrop-filter: blur(8px);
 }
 dialog{
-    backdrop-filter: blur(20px);
+    font-size: inherit;
+    backdrop-filter: blur(8px);
     color: inherit;
-    background-color: rgb(226, 235, 226);
-    font-size: 0.9rem;
+    background-color: rgba(245, 117, 70, 0.1);
     position: absolute;
     bottom: 10%;
     margin: 0 auto;
-    min-width: 300px;
-    width: 50%;
-    max-width: 400px;
-    border: 2px solid rgb(100, 230, 80);
+    width: calc(300px + 12vw);
+    max-width: 800px;
     border-radius: 0.3rem;
-    padding: 1rem;
+    padding: 2rem;
+    outline: none;
+    border: none;
+    box-shadow: 1px 1px 5px orangered;
 }
 form{
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 label, input, button, select{
     display: block;
@@ -50,8 +53,13 @@ label, input, button, select{
     background-color: inherit;
 }
 input, select, button{
+    height: 2.5em;
     padding: 0.3rem;
     border-radius: 0.3rem;
+}
+select {
+  outline: none;
+  color: rgb(144, 155, 45)
 }
 select, button{
     min-width: 100px;
@@ -77,20 +85,10 @@ button{
 button:hover{
     border: 1px solid orangered;
 }
-#refer{
-    position: fixed;
-    bottom: 1rem;
-    left: 1rem;
-}
-#refer{
-    text-decoration: none;
-    color: rgb(100, 230, 80);
-}
-
 .container {
-  font-size: 1.2rem;
-  text-shadow: 1px 1px orangered;
-  color: rgb(250, 219, 219);
+  font-weight: 600;
+  font-size: inherit;
+  color : inherit;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
@@ -114,7 +112,7 @@ button:hover{
     width: calc(100px + 10vw);
     min-height: calc(100px + 5vh);
     box-shadow: 1px 1px 5px orangered;
-    background-color: rgba(245, 117, 70, 0.692);
+    background-color: rgba(245, 117, 70, 0.2);
 }
 .buttons-holder {
     display : flex;
