@@ -115,3 +115,7 @@ function createStatus(status) {
   }
   return createCard('Read : ', 'Not Yet')
 }
+const newBook = new Book('Attack On Titan', 'Hajime Isayama', '5978', true);
+const newBook2 = new Book('Naruto', 'Masashi Kishimoto', '7000', false);
+library.push(newBook, newBook2);
+displayLibrary()

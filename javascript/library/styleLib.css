@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Delius&display=swap');
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -11,6 +13,7 @@ body{
     height: 100vh;
     background-attachment: fixed;
     margin-bottom: 1rem;
+    font-family: 'Delius', 'Literata', 'Roboto', system-ui, serif;
 }
 h1{
     background-color: rgba(71, 71, 71, 0.2);
@@ -85,13 +88,15 @@ button:hover{
 }
 
 .container {
+  font-size: 1.2rem;
+  text-shadow: 1px 1px orangered;
   color: rgb(250, 219, 219);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   margin: 0 auto;
   width: 80%;
-  min-height: 300px;
+  min-height: 200px;
   background-color: rgba(71, 71, 71, 0.2);
   backdrop-filter: blur(8px);
   border-radius: 0.5rem;
@@ -107,7 +112,7 @@ button:hover{
     flex-direction: column;
     margin: 0.5rem;
     width: calc(100px + 10vw);
-    height: calc(100px + 5vh);
+    min-height: calc(100px + 5vh);
     box-shadow: 1px 1px 5px orangered;
     background-color: rgba(245, 117, 70, 0.692);
 }
