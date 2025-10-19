@@ -104,4 +104,4 @@ class Player {
   }
 }
 
-export {Ship, GameBoard}
+export {Ship, GameBoard, Player}
