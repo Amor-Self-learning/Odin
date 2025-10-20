@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
+.cell {
+  text-align: center;
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  border-radius: 8px;
+  background-color: rgba(0, 255, 255, 0.267);
+  border: 1px solid rgba(120, 120, 120, 0.1);
+}
+body {
+  font-family: "Rubik Distressed", "Literata", system-ui, sans-serif;
+  backdrop-filter: blur(4px);
+  padding-top : 2rem;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("nico-smit-SN9Gf7u_KNE-unsplash.jpg");
+  background-size: cover;
+}
+main {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2vw;
+}
+header{
+  backdrop-filter: blur(4px);
+  text-align: center;
+  padding: 1rem;
+  font-size : 1.5rem;
+  background-color: rgba(0, 255, 255, 0.2);
+  border-radius: 0.5rem;
+}
+section {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 255, 255, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid rgba(120, 120, 120, 0.5);
+  width: 570px;
+}
+.turn{
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.info{
+  margin: 0 auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.5rem;
+}
+
+.ship {
+  background-color: aquamarine;
+}
+
+.hitted {
+  font-size: 3rem;
+  color: red;
+  background-color: rgb(243, 200, 186);
+  cursor: not-allowed;
+}
+.missed {
+  background-color: rgba(240, 239, 198, 0.63);
+  font-weight: 900;
+  font-size: 2rem;
+  cursor: not-allowed;
+}
+footer {
+  color: aqua;
+  font-size: 1.2rem;
+  margin-top: 10vh;
+  text-align: center;
+}
+a {
+  color: inherit;
+}
