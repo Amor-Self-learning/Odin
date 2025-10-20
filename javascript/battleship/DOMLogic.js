@@ -2,9 +2,11 @@ import { Player } from './main.js';
 const playerBoard = document.querySelector('.player.board');
 const computerBoard = document.querySelector('.computer.board');
 const main = document.querySelector('main');
+const turnDiv = document.querySelector('.turn');
 
 let turn, player, computer, gameEnd;
 function startGame() {
+  turnDiv.textContent = "Your Turn!";
   gameEnd = false;
   player = new Player('You');
   computer = new Player('Computer');
@@ -32,7 +34,6 @@ main.addEventListener('click', (e) => {
     validMove(e.target.dataset.x, e.target.dataset.y)
   ) {
     playerMove(e.target.dataset.x, e.target.dataset.y);
-    computerMove();
     return true;
   }
 })
@@ -53,33 +54,42 @@ function createCell(player) {
 }
 
 function playerMove(x, y) {
-  let result;
-  do {
-    result = computer.gameboard.receiveAttack(parseInt(x), parseInt(y));
-    renderBoard(computerBoard, computer.gameboard.board)
-  } while (result);
+  const result = computer.gameboard.receiveAttack(parseInt(x), parseInt(y));
+  renderBoard(computerBoard, computer.gameboard.board)
+  
   if(computer.gameboard.allShipsSunk()) {
     declareWinner(player);
     return true;
   }
+
+  if (result === true) {
+    // If it was a HIT, do NOT increment turn, and tell the player to go again
+    turnDiv.textContent = "Hit! Your Turn Again!";
+    return true;
+  }
+  
   turn ++;
+  turnDiv.textContent = "Computer's Turn!";
+  setTimeout(computerMove, 100);
   return true;
 }
+
 function computerMove() {
   let result;
-  
   do {
     const [x, y] = getComputerMove();
     result = player.gameboard.receiveAttack(x, y);
     setTimeout(() => {
       renderBoard(playerBoard, player.gameboard.board);
-    }, 200);
-  } while (result);
+      turnDiv.textContent = "Your Turn!";
+    }, 200); 
 
-  if(player.gameboard.allShipsSunk()) {
-    declareWinner(computer);
-    return true;
-  }
+    if(player.gameboard.allShipsSunk()) {
+      declareWinner(computer);
+      return true;
+    }
+  } while (result); // Continue to loop if result is TRUE (hit)
+
   turn ++;
   return true;
 }
@@ -88,6 +98,7 @@ function getComputerMove() {
   let x, y;
   let boardValue;
   do {
+
     x = Math.floor(Math.random() * 10);
     y = Math.floor(Math.random() * 10);
     boardValue = player.gameboard.board[x][y];
@@ -109,9 +120,9 @@ function renderBoard (dom, board) {
       // 2. Render Miss (Both Boards)
       else if(board[i][j] === -1) {
         cell.classList.add('missed');
-        cell.textContent = 'M';
+        cell.textContent = '.';
       }
-      else if (dom === playerBoard && board[i][j] > 1) { 
+      else if (dom === playerBoard && typeof board[i][j] === 'object') { 
         cell.classList.add('ship'); // Add a class to style the unhit ship
       }
       else if (board[i][j] === 0) {
