@@ -34,7 +34,7 @@ img {
 }
 
 header, footer {
-  font-size: calc(1rem + 0.5vw);
+  font-size: calc(0.5rem + 1.4vw);
   padding: 1rem;
   display : flex;
   flex-direction: row;
@@ -116,4 +116,8 @@ h1 {
 
 img.icon {
   width: calc(1rem + 1vw);
+}
+
+.links {
+  margin: 1rem;
 }
