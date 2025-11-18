@@ -1,3 +1,5 @@
+import fetchCover from './addCover.js';
+
 let library = []
 const container = document.querySelector('.container')
 // Open dialog box on add new book click
@@ -78,7 +80,23 @@ function createBookCard(bookData) {
   const authorCard = createCard('Author : ', author);
   const pageesCard = createCard('Pages : ', pages);
   const readCard = createStatus(read);
+  
+  const bookCover = document.createElement('div');
+  bookCover.classList.add('book-cover');
+  const bookImg = document.createElement('img');
+  
+  // Set the default cover immediately
+  bookImg.setAttribute('src', './default.jpeg'); 
 
+  // Use an async function to fetch the cover and update the image source
+  (async () => {
+    const coverUrl = await fetchCover(title);
+    if (coverUrl) {
+      bookImg.setAttribute('src', coverUrl);
+    }
+  })();
+
+  bookCover.appendChild(bookImg)
   const bookCard = document.createElement('article');
   bookCard.className = 'card bookCard'
   const readButton = document.createElement('button');
@@ -94,7 +112,7 @@ function createBookCard(bookData) {
   buttons.append(readButton, delButton)
   const bookMeta = document.createElement('div');
   bookMeta.classList.add('book-meta');
-  bookMeta.append(titleCard, authorCard, pageesCard, readCard);
+  bookMeta.append(bookCover,titleCard, authorCard, pageesCard, readCard);
   bookCard.append(bookMeta, buttons);
   return bookCard;
 }
@@ -123,6 +141,6 @@ addNewBookToLibrary('Naruto', 'Masashi Kishimoto', '7000', false);
 addNewBookToLibrary('To Kill a Mockingbird', 'Harper Lee', '309', true);
 addNewBookToLibrary('Pride and Prejudice', 'Jane Austen', '400', false);
 addNewBookToLibrary('Alchemist', 'Paulo Coelho', '200', true);
-addNewBookToLibrary('Freekonomics', 'Steven D. Levitt & Stephen J. Dubner', '300', true);
+addNewBookToLibrary('Freakonomics', 'Steven D. Levitt & Stephen J. Dubner', '300', true);
 addNewBookToLibrary('The Sapiens', 'Yuval Noah Harari', '350', true);
-displayLibrary()
+displayLibrary();

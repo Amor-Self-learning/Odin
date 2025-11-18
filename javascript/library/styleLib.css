@@ -15,7 +15,7 @@ body{
     margin-bottom: 1rem;
     font-family: 'Delius', 'Literata', 'Roboto', system-ui, serif;
     font-size: calc(0.7rem + 0.5vw);
-    color: #abf78d;
+    color: #e3f1de;
 }
 h1{
     background-color: rgba(71, 71, 71, 0.2);
@@ -62,10 +62,18 @@ select {
   outline: none;
   color: rgb(144, 155, 45)
 }
-select, button{
+select{
     width: 48%;
     margin: 0 auto;
     height: auto;
+}
+button {
+    height: auto;
+}
+.buttons-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 }
 .book-meta {
     font-size: 60%;
@@ -81,6 +89,7 @@ select, button{
     background-color: orangered;
     max-width: 200px;
     margin: 0 auto;
+    padding: 0.4rem 0.8rem;
 }
 button{
     border: 1px solid rgba(0, 0, 0, 0);
@@ -97,7 +106,7 @@ button:hover{
   flex-wrap: wrap;
   gap: 2rem;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
   min-width: 300px;
   background-color: rgba(71, 71, 71, 0.2);
   backdrop-filter: blur(8px);
@@ -114,13 +123,16 @@ button:hover{
     flex-direction: column;
     justify-content: space-between;
     margin: 0.5rem;
-    width: calc(100px + 10vw);
+    width: calc(100px + 1vw);
     min-width: 150px;
-    min-height: calc(200px + 5vh);
     box-shadow: 1px 1px 5px orangered;
 }
 
 .buttons-holder {
     display : flex;
     justify-content: space-between;
+}
+
+.book-cover img {
+    width:100%;
 }
