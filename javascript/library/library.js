@@ -13,7 +13,7 @@ class Book{
     this.author = author;
     this.pages = pages; 
     this.read = read;
-}
+  }
     toggle(){
             if(this.read)
                 this.read = false
@@ -79,7 +79,7 @@ function createBookCard(bookData) {
   const pageesCard = createCard('Pages : ', pages);
   const readCard = createStatus(read);
 
-  const bookCard = document.createElement('div');
+  const bookCard = document.createElement('article');
   bookCard.className = 'card bookCard'
   const readButton = document.createElement('button');
   readButton.textContent = 'Change Status';
@@ -92,7 +92,10 @@ function createBookCard(bookData) {
   const buttons = document.createElement('div');
   buttons.classList.add('buttons-holder');
   buttons.append(readButton, delButton)
-  bookCard.append(titleCard, authorCard, pageesCard, readCard, buttons)
+  const bookMeta = document.createElement('div');
+  bookMeta.classList.add('book-meta');
+  bookMeta.append(titleCard, authorCard, pageesCard, readCard);
+  bookCard.append(bookMeta, buttons);
   return bookCard;
 }
 
@@ -116,5 +119,10 @@ function createStatus(status) {
   return createCard('Read : ', 'Not Yet')
 }
 addNewBookToLibrary('Attack On Titan', 'Hajime Isayama', '5978', true);
-addNewBookToLibrary('Naruto', 'Masashi Kishimoto', '7000', false)
+addNewBookToLibrary('Naruto', 'Masashi Kishimoto', '7000', false);
+addNewBookToLibrary('To Kill a Mockingbird', 'Harper Lee', '309', true);
+addNewBookToLibrary('Pride and Prejudice', 'Jane Austen', '400', false);
+addNewBookToLibrary('Alchemist', 'Paulo Coelho', '200', true);
+addNewBookToLibrary('Freekonomics', 'Steven D. Levitt & Stephen J. Dubner', '300', true);
+addNewBookToLibrary('The Sapiens', 'Yuval Noah Harari', '350', true);
 displayLibrary()
